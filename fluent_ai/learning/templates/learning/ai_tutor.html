@@ -1,0 +1,92 @@
+{% extends "learning/base.html" %}
+
+{% block title %}AI Tutor - Fluent AI{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+
+    <div class="page-title">
+
+        <h1>AI Tutor</h1>
+
+        <p>
+            Ask questions about your English lessons.
+        </p>
+
+    </div>
+
+    <span class="badge badge-success">
+        AI Online
+    </span>
+
+</div>
+
+
+<div class="glass-card">
+
+    <div class="chat-box">
+
+        {% for chat in chat_history %}
+
+            <div class="chat-row user">
+
+                <div class="chat-bubble">
+                    {{ chat.message }}
+                </div>
+
+            </div>
+
+
+            <div class="chat-row bot">
+
+                <div class="chat-bubble">
+                    {{ chat.response|linebreaksbr }}
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="chat-row bot">
+
+                <div class="chat-bubble">
+
+                    Hello! I'm your Fluent AI Tutor.
+
+                    <br><br>
+
+                    You can ask me about grammar,
+                    vocabulary, sentence structure,
+                    lessons or English practice.
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <form method="post" class="chat-input">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="message"
+            class="form-control"
+            placeholder="Ask your AI Tutor something..."
+            required
+        >
+
+        <button type="submit" class="btn btn-primary">
+            Send
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
